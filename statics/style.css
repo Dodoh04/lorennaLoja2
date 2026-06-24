@@ -452,22 +452,128 @@ footer {
     background: #000000;
 }
 
-.card-page img {
-    width: 100%;
-    max-width: 560px;
-    border-radius: 12px;
-}
-
 .detail-grid {
     display: grid;
     grid-template-columns: 1.2fr 0.8fr;
     gap: 24px;
+    align-items: start;
+}
+
+.gallery-stage {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #111;
+}
+
+.gallery-track {
+    display: flex;
+    height: 100%;
+    transition: transform 0.35s ease;
+}
+
+.gallery-slide {
+    flex: 0 0 100%;
+    height: 100%;
+}
+
+.gallery-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.gallery-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    border: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+    font-size: 1.6rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.gallery-nav:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.gallery-prev {
+    left: 12px;
+}
+
+.gallery-next {
+    right: 12px;
+}
+
+.gallery-thumbs {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+}
+
+.gallery-thumb {
+    width: 80px;
+    height: 60px;
+    padding: 0;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    background: #111;
+}
+
+.gallery-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.gallery-thumb.is-active {
+    border-color: #f7d56d;
 }
 
 .detail-panel {
     background: #fff;
     padding: 24px;
     border-radius: 12px;
+}
+
+.detail-price {
+    color: #b8860b;
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin: 8px 0 16px;
+}
+
+.detail-specs {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 16px;
+}
+
+.detail-specs li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eef1f6;
+}
+
+.detail-description h3 {
+    margin: 12px 0 6px;
+}
+
+.detail-description p {
+    color: #333;
+    line-height: 1.6;
 }
 
 .table {
