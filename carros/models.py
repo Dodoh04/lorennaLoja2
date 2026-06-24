@@ -4,6 +4,7 @@ from django.db import models
 class Carro(models.Model):
     marca = models.CharField(max_length=100)
     modelo = models.CharField(max_length=150)
+    placa = models.CharField(max_length=10, unique=True)
     data_cadastro = models.DateTimeField(auto_now_add=True)
     km = models.PositiveIntegerField(verbose_name='Quilometragem')
     cor = models.CharField(max_length=50, verbose_name='Cor', blank=True)
@@ -11,9 +12,8 @@ class Carro(models.Model):
     descricao = models.TextField(verbose_name='Descrição', blank=True)
     preco = models.DecimalField(max_digits=12, decimal_places=2, verbose_name='Preço')
 
-
     class Meta:
-        ordering = ['-created_at']
+        ordering = ['-data_cadastro']
         verbose_name = 'Carro'
         verbose_name_plural = 'Carros'
 
@@ -21,8 +21,6 @@ class Carro(models.Model):
         return f'{self.marca} {self.modelo}'
 
 
-
-# 🔥 NOVA TABELA: FOTOS DO CARRO (MULTIPLAS IMAGENS)
 class CarroImagem(models.Model):
     carro = models.ForeignKey(
         Carro,
@@ -34,18 +32,11 @@ class CarroImagem(models.Model):
 
     class Meta:
         ordering = ['ordem']
+        verbose_name = 'Imagem do Carro'
+        verbose_name_plural = 'Imagens dos Carros'
 
     def __str__(self):
         return f"Imagem de {self.carro.marca} {self.carro.modelo}"
-    
-    class Meta:
-        ordering = ['-created_at']
-        verbose_name = 'Carro'
-        verbose_name_plural = 'Carros'
-
-    def __str__(self):
-        return f'{self.marca} {self.modelo}'
-
 
 
 class Lead(models.Model):
