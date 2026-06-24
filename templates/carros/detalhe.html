@@ -1,25 +1,59 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 <section class="card-page">
     <div class="container detail-grid">
-        <div>
-            {% with carro_imagem=carro.imagens.first %}
-            {% if carro_imagem %}
-            <img src="{{ carro_imagem.imagem.url }}" alt="{{ carro.modelo }}">
+        <div class="gallery" data-gallery>
+            <div class="gallery-stage">
+                {% if carro.imagens.all %}
+                <button type="button" class="gallery-nav gallery-prev" data-prev aria-label="Imagem anterior">‹</button>
+                <div class="gallery-track" data-track>
+                    {% for img in carro.imagens.all %}
+                    <div class="gallery-slide">
+                        <img src="{{ img.imagem.url }}" alt="{{ carro.modelo }}">
+                    </div>
+                    {% endfor %}
+                </div>
+                <button type="button" class="gallery-nav gallery-next" data-next aria-label="Próxima imagem">›</button>
+                {% else %}
+                <div class="gallery-slide">
+                    <img src="{% static 'Lorenna.png' %}" alt="Sem imagem">
+                </div>
+                {% endif %}
+            </div>
+            {% if carro.imagens.all|length > 1 %}
+            <div class="gallery-thumbs" data-thumbs>
+                {% for img in carro.imagens.all %}
+                <button type="button" class="gallery-thumb{% if forloop.first %} is-active{% endif %}" data-thumb="{{ forloop.counter0 }}">
+                    <img src="{{ img.imagem.url }}" alt="Miniatura {{ forloop.counter }}">
+                </button>
+                {% endfor %}
+            </div>
             {% endif %}
-            {% endwith %}
         </div>
         <div class="detail-panel">
             <p class="car-card-brand">{{ carro.marca }}</p>
             <h2>{{ carro.modelo }}</h2>
-            <p>{{ carro.km }} km • {{ carro.cor }} • {{ carro.placa }}</p>
-            <p><strong>Cadastro:</strong> {{ carro.data_cadastro|date:'d/m/Y' }}</p>
+            <p class="detail-price">R$ {{ carro.preco|floatformat:2 }}</p>
+            <ul class="detail-specs">
+                <li><strong>Quilometragem:</strong> {{ carro.km }} km</li>
+                {% if carro.cor %}<li><strong>Cor:</strong> {{ carro.cor }}</li>{% endif %}
+                {% if carro.combustivel %}<li><strong>Combustível:</strong> {{ carro.combustivel }}</li>{% endif %}
+                <li><strong>Cadastro:</strong> {{ carro.data_cadastro|date:'d/m/Y' }}</li>
+            </ul>
+            {% if carro.descricao %}
+            <div class="detail-description">
+                <h3>Descrição</h3>
+                <p>{{ carro.descricao|linebreaksbr }}</p>
+            </div>
+            {% endif %}
             <button type="button"
-                class="button button-secondary"
+                class="button detail-cta"
                 data-carro-id="{{ carro.pk }}"
                 data-carro-modelo="{{ carro.modelo }}"
                 onclick="abrirLeadModal(this)">
+                <img src="{% static 'icons/whatsapp-32.png' %}" alt="" aria-hidden="true">
                 QUERO ENVIAR MINHA PROPOSTA
             </button>
         </div>
@@ -117,6 +151,47 @@ document.addEventListener('DOMContentLoaded', function () {
             mensagem.className = 'lead-message error';
         }
     });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const gallery = document.querySelector('[data-gallery]');
+    if (!gallery) {
+        return;
+    }
+    const track = gallery.querySelector('[data-track]');
+    if (!track) {
+        return;
+    }
+    const slides = track.querySelectorAll('.gallery-slide');
+    const thumbs = gallery.querySelectorAll('[data-thumb]');
+    let current = 0;
+
+    function show(index) {
+        if (slides.length === 0) {
+            return;
+        }
+        current = (index + slides.length) % slides.length;
+        track.style.transform = `translateX(-${current * 100}%)`;
+        thumbs.forEach(function (thumb, i) {
+            thumb.classList.toggle('is-active', i === current);
+        });
+    }
+
+    const prev = gallery.querySelector('[data-prev]');
+    const next = gallery.querySelector('[data-next]');
+    if (prev) {
+        prev.addEventListener('click', function () { show(current - 1); });
+    }
+    if (next) {
+        next.addEventListener('click', function () { show(current + 1); });
+    }
+    thumbs.forEach(function (thumb) {
+        thumb.addEventListener('click', function () {
+            show(parseInt(thumb.getAttribute('data-thumb'), 10));
+        });
+    });
+
+    show(0);
 });
 </script>
 {% endblock %}
