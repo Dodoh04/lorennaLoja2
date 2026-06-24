@@ -4,7 +4,7 @@ from django.db import models
 class Carro(models.Model):
     marca = models.CharField(max_length=100)
     modelo = models.CharField(max_length=150)
-    placa = models.CharField(max_length=10, unique=True)
+    placa = models.CharField(max_length=10, unique=True, null=True, blank=True)
     data_cadastro = models.DateTimeField(auto_now_add=True)
     km = models.PositiveIntegerField(verbose_name='Quilometragem')
     cor = models.CharField(max_length=50, verbose_name='Cor', blank=True)

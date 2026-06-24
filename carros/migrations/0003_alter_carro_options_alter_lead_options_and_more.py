@@ -80,8 +80,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='carro',
             name='placa',
-            field=models.CharField(default='SEM-PLACA', max_length=10, unique=True),
-            preserve_default=False,
+            field=models.CharField(blank=True, max_length=10, null=True, unique=True),
         ),
         migrations.AddField(
             model_name='lead',
