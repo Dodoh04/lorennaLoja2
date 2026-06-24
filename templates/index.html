@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load humanize %}
+
 
 {% load static %}
 
@@ -63,7 +65,7 @@
                 <div class="car-card-body">
                     <p class="car-card-brand">{{ carro.marca }}</p>
                     <h3>{{ carro.modelo }}</h3>
-                    <p>{{ carro.km }} km • {{ carro.cor }}</p>
+                    <p>{{ carro.km|intcomma }} km • {{ carro.cor }}</p>
                     <a href="{% url 'detalhe-carro' carro.pk %}" class="button button-secondary">Ver detalhes</a>
                 </div>
             </article>
