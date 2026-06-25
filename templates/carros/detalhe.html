@@ -41,8 +41,9 @@
             <ul class="detail-specs">
                 <li><strong>Quilometragem:</strong> {{ carro.km|intcomma }} km</li>
                 {% if carro.cor %}<li><strong>Cor:</strong> {{ carro.cor }}</li>{% endif %}
+                {% if carro.cor %}<li><strong>Ano:</strong> {{ carro.ano }}</li>{% endif %}
                 {% if carro.combustivel %}<li><strong>Combustível:</strong> {{ carro.combustivel }}</li>{% endif %}
-                <li><strong>Cor:</strong> {{ carro.cor }}</li>
+                <li><strong>Laudo Cautelar:</strong> Consulte a loja</li>
             </ul>
             {% if carro.descricao %}
             <div class="detail-description">

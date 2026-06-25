@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block content %}
+<section class="card-page">
+    <div class="container">
+        <h2>
+            <span class="section-title-light">ESTOQUE</span>
+            <span class="section-title-gold">LORENNA AUTOMÓVEIS</span>
+        </h2>
+
+        <div class="search-bar"
+             hx-get="{% url 'estoque' %}"
+             hx-trigger="input delay:400ms from:find input"
+             hx-target="#car-grid"
+             hx-swap="outerHTML"
+             hx-include="find input">
+
+            <input
+                type="text"
+                name="q"
+                placeholder="Pesquisar por marca, modelo, cor, ano..."
+                autocomplete="off">
+        </div>
+
+        {% include 'carros/partials/car_grid.html' %}
+    </div>
+</section>
+{% endblock %}

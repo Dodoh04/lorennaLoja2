@@ -7,6 +7,7 @@ class Carro(models.Model):
     placa = models.CharField(max_length=10, unique=True, null=True, blank=True)
     data_cadastro = models.DateTimeField(auto_now_add=True)
     km = models.PositiveIntegerField(verbose_name='Quilometragem')
+    ano = models.PositiveIntegerField( verbose_name='Ano', null = True, blank=True)
     cor = models.CharField(max_length=50, verbose_name='Cor', blank=True)
     combustivel = models.CharField(max_length=50, verbose_name='Combustível', blank=True)
     descricao = models.TextField(verbose_name='Descrição', blank=True)

@@ -2,6 +2,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 from .models import Carro, Lead, Venda
+from django.db.models import Q
 
 
 def home(request):
@@ -30,24 +31,19 @@ def detalhe_carro(request, pk):
 def criar_lead(request):
     if request.method != 'POST':
         return JsonResponse({'success': False, 'message': 'Método inválido.'}, status=405)
-
     telefone = (request.POST.get('telefone') or '').strip()
     carro_id = request.POST.get('carro_id')
     carro_modelo = (request.POST.get('carro_modelo') or '').strip()
-
     if not telefone:
         return JsonResponse({'success': False, 'message': 'Informe um telefone para continuar.'}, status=400)
-
     carro = None
     if carro_id:
         carro = get_object_or_404(Carro, pk=carro_id)
-
     lead = Lead.objects.create(
         carro=carro,
         telefone=telefone,
         origem='Site',
     )
-
     return JsonResponse({
         'success': True,
         'message': 'Sua proposta foi enviada com sucesso!',
@@ -65,3 +61,25 @@ def lista_vendas(request):
 
 def sobre_nos(request):
     return render(request, 'sobre_nos.html')
+
+
+def estoque(request):
+    carros = Carro.objects.all()
+
+    busca = request.GET.get('q', '').strip()
+
+    if busca:
+        carros = carros.filter(
+            Q(marca__icontains=busca) |
+            Q(modelo__icontains=busca) |
+            Q(cor__icontains=busca) |
+            Q(ano__icontains=busca) 
+            #Q(km__icontains=busca)
+        )
+
+    if request.headers.get('HX-Request'):
+        return render(request, 'carros/partials/car_grid.html', {'carros': carros})
+
+    return render(request, 'carros/estoque.html', {
+        'carros': carros,
+    })
