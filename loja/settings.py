@@ -9,8 +9,14 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-2%dtk*cgwbz!fk@x%m5m(a=p18rvftea%kfn5bkwvnjzfqn=t1'
+<<<<<<< HEAD
 DEBUG = False
 ALLOWED_HOSTS = ['187.127.12.34']
+=======
+
+DEBUG = False
+ALLOWED_HOSTS = ["srv1778329.hstgr.cloud", "187.127.12.34"]
+>>>>>>> 260cdbe (Configure static and media assets)
 
 INSTALLED_APPS = [
     'django.contrib.admin',
