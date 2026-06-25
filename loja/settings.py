@@ -3,12 +3,14 @@ Django settings for loja project.
 """
 
 from pathlib import Path
+import os
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-2%dtk*cgwbz!fk@x%m5m(a=p18rvftea%kfn5bkwvnjzfqn=t1'
-DEBUG = True
-ALLOWED_HOSTS = []
+DEBUG = False
+ALLOWED_HOSTS = ['187.127.12.34']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -77,11 +79,14 @@ TIME_ZONE = 'America/Sao_Paulo'
 USE_I18N = True
 USE_TZ = True
 
-STATIC_URL = 'static/'
+
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'   # ← ADICIONE ISSO
 STATICFILES_DIRS = [
     BASE_DIR / 'statics',
     BASE_DIR / 'img',
 ]
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
