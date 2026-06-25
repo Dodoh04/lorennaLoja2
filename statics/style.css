@@ -30,16 +30,45 @@ header {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
 }
 
-.navbar-wrap {
+
+.nav-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px; /* ← era 50px, reduzi para aproximar os dois */
+}
+
+.nav-links {
+    display: flex;
+    flex-direction: row; /* ← links lado a lado horizontalmente */
+    align-items: center;
+    gap: 6px;
+    height: auto; /* ← remove o 48px fixo */
+    list-style: none;
+    margin: 0;
     padding: 0;
+}
+
+.nav-contact-links {
+    display: flex;
+    flex-direction: row; /* ← contatos lado a lado */
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-wrap {
+    padding: 16px 0;
 }
 
 .navbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 20px;
-    min-height: 200px;
 }
 
 .brand {
@@ -50,35 +79,7 @@ header {
 }
 
 .brand img {
-    height: 100%;
-    width: auto;
-    display: block;
-}
-
-.nav-menu {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 50px;
-}
-
-.nav-links,
-.nav-contact-links {
-    display: flex;
-    align-items: center;
-    list-style: none;
-    margin: 0;
-}
-
-.nav-links {
-    gap: 6px;
-    height: 48px;
-}
-
-.nav-contact-links {
-    gap: 18px;
-    flex-wrap: wrap;
-    justify-content: flex-end;
+    height: 150px;
 }
 
 .nav-links a,
@@ -113,6 +114,20 @@ header {
 .nav-contact-links img {
     width: 18px;
     height: 18px;
+}
+
+.search-bar input{
+    width: 50%;
+    margin: 15px 0px 15px 10px;
+    color: #0c1427;
+    text-decoration: none;
+    padding: 12px 18px;
+    border: 0;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 15px;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
 }
 
 .hero {
@@ -272,7 +287,7 @@ header {
 .car-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 24px;
+    gap: 50px;
 }
 
 .car-card {
@@ -775,10 +790,77 @@ footer {
     }
 }
 @media (max-width: 680px) {
-   
+
+    header {
+        position: relative; /* ← remove o sticky */
+    }
+     .brand img{
+        height: 100px;
+    }
+    .search-bar input {
+        width: 70%;
+    }
+
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .nav-menu {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        width: 100%;
+    }
+
+    .nav-links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        height: auto;  /* ← corrige o height: 48px fixo que causava a sobreposição */
+    }
+
+    .nav-contact-links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .nav-links a {
+        height: auto;
+        padding: 6px 16px;
+    }
+
+    .nav-contact-links a {
+        justify-content: center;
+    }
 }
+
 @media (max-width: 480px) {
-    
+
+    .search-bar input{
+        width: 90%;
+    }
+    .nav-menu {
+        gap: 20px;
+    }
+
+    .nav-links, .nav-contact-links {
+        gap: 12px;
+    }
+
+    .nav-links a, .nav-contact-links a {
+        font-size: 0.9rem;
+    }
+    .brand img{
+        height: 80px;
+    }
 }
 
 

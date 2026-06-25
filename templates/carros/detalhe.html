@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const data = await response.json();
 
             if (response.ok && data.success) {
-                const message = `Olá! Vi o ${carroModelo} no site e quero saber mais sobre ele. Telefone: ${telefone}`;
+                const message = `Olá! Vi o ${carroModelo} no site e quero saber mais sobre ele.`;
                 const whatsappUrl = `https://wa.me/5511944429082?text=${encodeURIComponent(message)}`;
                 window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
                 mensagem.textContent = 'Redirecionando para o WhatsApp...';
