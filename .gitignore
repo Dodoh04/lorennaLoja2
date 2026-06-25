@@ -41,3 +41,13 @@ htmlcov/
 build/
 dist/
 *.egg-info/
+
+
+.venv/
+venv/
+staticfiles/
+media/
+db.sqlite3
+*.pyc
+__pycache__/
+loja/settings.py
