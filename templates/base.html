@@ -14,6 +14,12 @@
                 <a href="{% url 'index' %}" class="brand">
                     <img src="{% static 'Lorena_Automoveis_Logo1-removebg-preview.png' %}" alt="Lorenna Automóveis">
                 </a>
+                    <button class="hamburger" aria-label="Abrir menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
                 <div class="nav-menu">
                     <ul class="nav-links">
                         <li><a href="{% url 'index' %}">Início</a></li>
@@ -47,5 +53,22 @@
         </div>
     </footer>
     <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <script>
+const hamburger = document.querySelector(".hamburger");
+const navMenu = document.querySelector(".nav-menu");
+
+hamburger.addEventListener("click", () => {
+    hamburger.classList.toggle("active");
+    navMenu.classList.toggle("active");
+});
+
+// Fecha ao clicar em um link
+document.querySelectorAll(".nav-menu a").forEach(link => {
+    link.addEventListener("click", () => {
+        hamburger.classList.remove("active");
+        navMenu.classList.remove("active");
+    });
+});
+</script>
 </body>
 </html>

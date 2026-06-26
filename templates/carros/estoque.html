@@ -14,13 +14,15 @@
              hx-trigger="input delay:400ms from:find input"
              hx-target="#car-grid"
              hx-swap="outerHTML"
-             hx-include="find input">
+             hx-include="find input"
+             style="">
 
             <input
                 type="text"
                 name="q"
                 placeholder="Pesquisar por marca, modelo, cor, ano..."
-                autocomplete="off">
+                autocomplete="off"
+                style="">
         </div>
 
         {% include 'carros/partials/car_grid.html' %}
