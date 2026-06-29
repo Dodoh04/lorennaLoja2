@@ -923,6 +923,7 @@ footer {
 }
 
 @media (max-width: 480px) {
+    
 
     .search-bar input{
         width: 90%;
@@ -941,6 +942,11 @@ footer {
     .brand img{
         height: 80px;
     }
+    .car-card img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+}
 }
 
 
